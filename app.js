@@ -24,7 +24,7 @@ app.use(helmet());
 app.use(cors());
 app.options('*', cors()); // enable requests for all routes
 
-app.use(limiter);
+app.use(limiter); // is express-rate-limit
 
 mongoose.connect(NONGO_DB);
 console.log(NODE_ENV);

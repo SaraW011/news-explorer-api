@@ -25,7 +25,9 @@ const createUser = async (req, res, next) => {
       });
       if (newUser) {
         res.status(201).send({
-          newUser
+          // do this to prevent returning password hash:
+          name: newUser.name,
+          email: newUser.email,
         });
       }
     }
