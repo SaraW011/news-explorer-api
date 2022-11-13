@@ -5,7 +5,7 @@ const { celebrate, Joi, Segments } = require('celebrate');
 const { currentUser, getUsres } = require('../controllers/users');
 
 router.get(
-  '/me',
+  '/users/me',
   celebrate({
     [Segments.HEADERS]: Joi.object().keys({}).unknown(true)
   }),
