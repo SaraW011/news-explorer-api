@@ -39,7 +39,7 @@ router.post(
 
 // deletes the stored article by _id
 router.delete(
-  '/:articleId',
+  '/articles/:articleId',
   celebrate({
     [Segments.HEADERS]: Joi.object().keys({}).unknown(true),
     [Segments.PARAMS]: Joi.object().keys({
