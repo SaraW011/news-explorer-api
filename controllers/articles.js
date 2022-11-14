@@ -2,18 +2,29 @@ const Article = require('../models/article');
 const NotFoundError = require('../middleware/errors/not-found-err');
 const UnauthorizedError = require('../middleware/errors/no-authorization-err');
 
-// get article by owner:
+// get article by owner:(updated for frontend use below)
+// const getArticles = async (req, res, next) => {
+//   try {
+//     const userAuth = await Article.findOne({});
+//     if (userAuth) {
+//       next(new UnauthorizedError('danger zone, show ID'));
+//     }
+//     const owner = req.user._id;
+//     const articles = await Article.find({ owner });
+//     if (articles.length === 0) {
+//       throw new NotFoundError('No articles saved yet...');
+//     } else res.status(200).send(articles);
+//   } catch (error) {
+//     next(error);
+//   }
+// };
+
 const getArticles = async (req, res, next) => {
   try {
-    const userAuth = await Article.findOne({});
-    if (userAuth) {
-      next(new UnauthorizedError('danger zone, show ID'));
-    }
-    const owner = req.user._id;
-    const articles = await Article.find({ owner });
+    const articles = await Article.find({ owner: req.user._id });
     if (articles.length === 0) {
       throw new NotFoundError('No articles saved yet...');
-    } else res.status(200).send(articles);
+    } else res.send(articles);
   } catch (error) {
     next(error);
   }
