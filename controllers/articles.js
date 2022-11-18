@@ -50,7 +50,7 @@ const deleteArticle = async (req, res, next) => {
     } else if (req.user._id !== article.owner.toString()) {
       throw new UnauthorizedError('you can delete only your own articles');
     } else {
-      await Article.findByIdAndRemove(req.params.articleId);
+      await Article.findByIdAndRemove(article._id.toString());
     }
     res.status(200).json('Article deleted from collection');
   } catch (err) {
