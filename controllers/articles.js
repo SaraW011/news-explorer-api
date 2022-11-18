@@ -44,8 +44,7 @@ const saveArticle = async (req, res, next) => {
 
 const deleteArticle = async (req, res, next) => {
   try {
-    const article = await Article.findById(req.params.articleId).select;
-    'owner'();
+    const article = await Article.findById(req.params.articleId).select('+owner');
     if (!article) {
       throw new NotFoundError('Cannot find article');
     } else if (req.user._id !== article.owner.toString()) {
